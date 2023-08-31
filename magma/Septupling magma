@@ -1,0 +1,39 @@
+prime:=6277101735386680763835789423207666416083908700390324961279;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+
+E:=EllipticCurve([a,b]);
+print E;
+
+//P:=Random(E);
+P:=E![3055563715971644849423804859220265481316585815874058627244, 5301271154980119921208363180474818072856515133833450622956];
+print "El punto P= ", P;
+X1:=P[1];
+Y1:=P[2];
+Z1:=P[3];
+
+
+A := X1^4 + X1^3 + a;
+B := X1^2 * (A-X1^3);
+C := B*X1^3 - A^3;
+D := (C*A*(X1^2) - A*(B^2))/X1;
+E := A + 2*A^3 - X1*B^3;
+F := (D*B*A^2 - X1*B*C^2)/X1;
+
+X7 := X1 + (F*D)/(E^2);
+Y7 := X7 + Y1 + (F^2*C)/(X1*E^3) + (X1^2 + Y1)*(F*D)/(X1*E^2);
+print " ";
+print "x7", X7;
+print "y7", Y7;
+print " ";
+P7 := 7*P;a
+print "7P",P7;
+print " ";
+if P7[1] eq X7 and P7[2] eq Y7 then  
+	print "esta bueno";
+else a
+	print "esta todo malo";
+end if;

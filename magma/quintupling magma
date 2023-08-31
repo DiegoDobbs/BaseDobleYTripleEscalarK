@@ -1,0 +1,46 @@
+prime:=6277101735386680763835789423207666416083908700390324961279;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+
+E:=EllipticCurve([a,b]);
+print E;
+
+//P:=Random(E);
+P:=E![3055563715971644849423804859220265481316585815874058627244, 5301271154980119921208363180474818072856515133833450622956];
+print "El punto P= ", P;
+
+X1:=P[1];
+print "X1 =", X1;
+Y1:=P[2];
+print "Y1 =", Y1;
+Z1:=P[3];
+print "Z1 =", Z1;
+
+
+beta  := 16*Y1^4;
+theta := 3*(X1+Z1^2)*(X1-Z1^2);
+omega := 12*X1*Y1^2-theta^2;
+alpha := (theta+omega)^2-(theta^2+omega^2+beta);
+gamma := alpha*beta-omega^3;
+phi   := gamma-alpha^2;
+rho   := 2*((Y1^2+alpha)^2-Y1^4-alpha^2);
+varphi := omega*phi;
+
+X5 := 4*(X1*gamma^2-rho*varphi);
+Y5 := 8*Y1*(gamma*omega^3*(3*alpha^2-gamma)-alpha^4*(omega^3+alpha*beta));
+Z5 := (Z1+gamma)^2-Z1^2-gamma^2;
+
+print " ";
+print "    X5 =", X5;
+print "    Y5 =", Y5;
+print "    Z5 =", Z5;
+
+print "affine";
+print "X5/Z5^2=", X5/Z5^2;
+print "Y5/Z5^3=", Y5/Z5^3;
+print "Z5=", Z5/Z5;
+
+print "5P=",5*P;

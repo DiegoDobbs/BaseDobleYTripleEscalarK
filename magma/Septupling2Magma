@@ -1,0 +1,68 @@
+prime:=6277101735386680763835789423207666416083908700390324961279;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+
+E:=EllipticCurve([a,b]);
+print E;
+
+//P:=Random(E);
+P:=E![3055563715971644849423804859220265481316585815874058627244, 5301271154980119921208363180474818072856515133833450622956];
+print "El punto P= ", P;
+X1:=P[1];
+Y1:=P[2];
+Z1:=P[3];
+
+alpha := 3*X1^2+a*Z1^4;//op
+X11   := 2*((X1+Y1^2)^2-X1^2-Y1^4);//op
+//X11 := 4*X1*Y1^2;
+//alpha := 3*(X1+Z1^2)*(X1-Z1^2);
+Z2    := (Y1+Z1)^2-Y1^2-Z1^2;
+YY11  := 16*Y1^4;
+X2    := alpha^2-2*X11;
+theta := X11-X2;
+YY2   := (alpha+theta)^2-alpha^2-theta^2-YY11;//2Y2:=
+Y21   := 4*YY2*theta^3;//8y
+X21   := 4*X2*theta^2;
+omega := YY11 - YY2;//ponerle un 2
+phi	  := omega^2 - 4*theta^3 -3*X21;
+Z22	  := 2*Z2*((theta+phi)^2-theta^2-phi^2);
+Y22   := 8*Y21*phi^3;
+X22	  := 4*X21*phi^2;
+gamma := omega^2+phi^2-(omega+phi)^2-4*Y21;	
+sigma := gamma^2-4*phi^3-3*X22;
+varphi:= gamma^2+sigma^2-(gamma+sigma)^2-4*Y22;
+
+X7 := varphi^2-4*sigma^3-8*X22*sigma^2;
+Y7 := varphi*(4*X22*sigma^2-X7)-8*Y22*sigma^3;
+Z7 := 2*Z22*sigma;
+
+print " ";
+print "x7", X7;
+print "y7", Y7;
+print "z7", Z7;
+print " ";
+print "affine";
+x7 := X7/Z7^2;
+y7 := Y7/Z7^3;
+z7 := Z7/Z7;
+print "X7=", x7;
+print "Y7=", y7;
+print "Z7=", z7;
+print " ";
+P7 := 7*P;
+print "7P",P7;
+print " ";
+if P7[1] eq x7 and P7[2] eq y7 and P7[3] eq z7 then  
+	print "esta bueno";
+else 
+	print "esta todo malo";
+end if;
+print "7P",7*P ;
+print "49 P",49*P;
+print "343 P",343*P;
+print "2401 P",2401*P;
+print "16807 P",16807*P;
+print "117649 P",117649*P;

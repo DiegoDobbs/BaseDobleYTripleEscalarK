@@ -1,0 +1,14 @@
+Base Conjutna varianza
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7
+0.000000 	 0.000000 	 0.000000 	 0.000000 	 0.000000 	 0.000000 	
+
+Base Conjutna deviacion estandar
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7
+0.000185 	 0.000212 	 0.000215 	 0.000309 	 0.000304 	 0.000514 	
+
+Base Conjutna promedio
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7
+0.006289 	 0.006443 	 0.006455 	 0.010059 	 0.010104 	 0.013653 	
+
+El mejor algoritmo de doble base conjunta es el de base 2-3
+ El promedio de su tiempo es de : 0.006289

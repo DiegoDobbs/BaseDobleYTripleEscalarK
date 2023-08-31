@@ -1,0 +1,48 @@
+prime:=6277101735386680763835789423207666416083908700390324961279;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+E:=EllipticCurve([a,b]);
+print E;
+//P:=Random(E);
+P:=E![3055563715971644849423804859220265481316585815874058627244, 5301271154980119921208363180474818072856515133833450622956];
+print "El punto P= ", P;
+
+s:=[1,1,1,1,1,1];
+b:=[4,4,4,1,0,0];
+c:=[7,5,4,4,2,1];
+d:=[2,1,0,0,0,0];
+
+Z := s[1]*P;
+aux:=0;
+for x in s do 
+    aux:=aux + 1;
+end for;
+for i  in [1 .. aux-1] do
+	u := b[i]-b[i+1];
+	v := c[i]-c[i+1];
+	w := d[i]-d[i+1];
+	if u eq 1 then 
+		Z := 5^w*Z;
+		if v ne 0 then 
+			Z := 3*(3^(v-1)*Z)+s[i+1]*P;
+		else 
+			Z := Z+s[i+1]*P;
+		end if;
+	else 
+		Z := 5^w*Z;
+		Z := 3^v*Z;
+		//Ceiling(u-1) Floor(u-1) Round(u-1)
+		Z := (2^(u-1))*Z;
+	end if;
+	Z := 2*Z + s[i+1]*P;
+end for;
+print " ";
+print "x =",Z[1];
+print "y =",Z[2];
+print "z =",Z[3];
+print "";
+print "895712P=",895712*P;
+

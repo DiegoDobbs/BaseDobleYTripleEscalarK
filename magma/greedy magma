@@ -1,0 +1,146 @@
+from callcryptolib import *
+from math import *
+
+def define (k):
+	best = pow(k,2)
+	for b in range(0, int(ceil(log(k,b1)))+5):
+		for t in range(0, int(ceil(log(k,b2)))+5):
+			z = pow(b1,b)*pow(b2,t)
+			if  abs(k-z) <= best and b < t:
+				best = abs(k-z)
+				bt=[b,t,z]
+	return bt
+
+def definemax (k,tmax,bmax):
+	best = pow(k,b1)
+	for b in range(0, bmax+1):
+		for t in range(0, tmax+1):
+			z = pow(b1,b)*pow(b2,t)
+			if  abs(k-z) < best:
+				best = abs(k-z)
+				bt=[b,t,z]
+	return bt
+
+def totaal (k,vectS,vectB,vectT):
+	total = 0
+	for i in range (0, len(vectS)):
+		total = total + vectS[i]*(pow(b1,vectB[i])*pow(b2,vectT[i]))
+	return int(total)
+
+def resulado (k,vectS,vectB,vectT):
+	print "total:",totaal (k,vectS,vectB,vectT),"///original",k,"///dekta",k-totaal (k,vectS,vectB,vectT)
+
+def dif(k,vectS,vectB,vectT):
+	total = totaal (k,vectS,vectB,vectT)
+	if k < total :
+		return -1
+	else :
+		return 1 
+def printmagma (vectS,vectB,vectT):
+	for i in range (0,len(vectS)):
+		if i == 0 :
+			if vectS[i] == 1:
+				print "a :=",b1,"^",vectB[i],"*",b2,"^",vectT[i],
+			else :
+				print "a := -",b1,"^",vectB[i],"*",b2,"^",vectT[i],
+		else :
+			if vectS[i] == 1:
+				print "+",b1,"^",vectB[i],"*",b2,"^",vectT[i],
+			else :
+				print "-",b1,"^",vectB[i],"*",b2,"^",vectT[i],
+	print ";\n"
+
+
+
+k  :=123;
+b1 :=2;
+b2 :=3;
+//-----------------------------
+K := k;
+vectB := AssociativeArray();	
+vectT := AssociativeArray();
+vectS := AssociativeArray();
+flag := true;
+aux :=1;
+while k ne 0 do
+	if flag eq true then
+		flag := false;
+		best := k^2;
+		for b in [0, Ceiling(Log(b1,k))+5] do
+			for t in [0, Ceiling(Log(b1,k))+5] do
+				z := b1^b*b2^t;
+                                
+print "z",z;
+				if  Abs(k-z) le best then 
+					best := Abs(k-z);
+					bmax := b;
+					tmax := t;
+				end if;
+			end for;
+		end for ;
+	else 
+		best := k^2;
+		for b in [0, vectB[aux-1]] do
+			for t in [0, vectT[aux-1]] do
+				z = b1^b*b2^t;
+
+				if  Abs(k-z) lt best then
+					best = Abs(k-z);
+					bmax := b;
+					tmax := t;
+				end if;
+			end for;
+		end for;
+	end if;
+	
+	vectB[aux] := bmax;
+	vectT[aux] := tmax;
+	aux2 := 0;
+	for x in Keys(vectS) do 
+                print "x",x;
+		aux2:=aux2 + 1;
+	end for;
+	total := 0;
+        if aux2 eq 0 then 
+	    total := b1^vectB[1]*b2^vectT[1];
+	else 
+            for i in [1, aux2] do
+		total := total + vectS[i]*(b1^vectB[i]*b2^vectT[i]);
+        	end for;
+        end if ;
+print "total",total;
+	if k lt total then
+		vectS[aux] := -1;
+	else 
+		vectS[aux] := 1;	
+	end if ;		
+	k := Abs(K-total);
+	if Abs(K-total) eq 0 then
+		k:=0;
+	end if;
+        print "aux",aux;
+	aux := aux +1;
+end while;
+	#return vectS, vectB, vectT
+# 314159 64564654 437 Conversion to DBNS with restricted exponents
+
+b1 = 2
+b2 = 5
+
+ConversionToDBNS(6352)
+
+#	magma
+#	s := [1, -1, -1, -1, -1, -1];
+#	b := [4, 0, 0, 0, 0, 0];
+#	t := [9, 6, 3, 2, 1, 0];
+#	aux := 0;
+#	for x in s do 
+#	    aux:= aux + 1;
+#	end for;
+#	k := 0;
+#	for i in [1 .. aux] do
+#	    k := k+s[i]*(2^b[i]*3^t[i]);
+#	end for;
+#	print "real",895712;
+#	print k;
+#	

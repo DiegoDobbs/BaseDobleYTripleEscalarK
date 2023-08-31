@@ -1,0 +1,14 @@
+prime:=115792089210356248762697446949407573530086143415290314195533631308867097853951;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+
+E:=EllipticCurve([a,b]);
+print E;
+
+P:=Random(E);
+Q:=Random(E);
+print "x",P[1],"y",P[2],"z",P[3];
+print "x",Q[1],"y",Q[2],"z",Q[3];

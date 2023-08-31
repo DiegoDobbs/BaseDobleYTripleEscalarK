@@ -1,0 +1,39 @@
+prime:=6277101735386680763835789423207666416083908700390324961279;
+// prime es un primo de 512 bits de nivel de seguridad NIST.
+print "prime = ", prime;
+F := FiniteField(prime) ; //Definiendo un cuerpo finito |p|_2=192
+a:=F!(-3);
+b:=F!(0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1); 
+
+E:=EllipticCurve([a,b]);
+print E;
+
+//P:=Random(E);
+P:=E![3055563715971644849423804859220265481316585815874058627244, 5301271154980119921208363180474818072856515133833450622956];
+print "El punto P= ", P;
+X1:=P[1];
+Y1:=P[2];
+Z1:=P[3];
+
+s:=;
+b:=;
+t:=;
+print " ";
+Z := s[1]*P;
+aux:=0;
+for x in s do 
+    aux:=aux + 1;
+end for;
+for i  in [1 .. aux-1] do
+	u := b[i]-b[i+1];
+	v := t[i]-t[i+1];
+	Z := 3^v*Z;
+	Z := 2^u*Z;
+	Z := Z + s[i+1]*P;
+end for;
+print " ";
+print "x =",Z[1];
+print "y =",Z[2];
+print "z =",Z[3];
+print "314159 P=",314159*P;
+

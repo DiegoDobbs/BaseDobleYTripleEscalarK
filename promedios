@@ -1,0 +1,21 @@
+Varianza
+				Doble base				Triple base 
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7	Base 2-3-5	Base 2-3-7	Base 2-5-7	Base 3-5-7
+0.000001 	 0.000002 	 0.000004 	 0.000001 	 0.000001 	 0.000000 	 0.000001 	 0.000003 	 0.000004 	 0.000001
+
+Desviacion estandar
+				Doble base				Triple base 
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7	Base 2-3-5	Base 2-3-7	Base 2-5-7	Base 3-5-7
+0.001044 	 0.001515 	 0.002001 	 0.000877 	 0.001127 	 0.000568 	 0.001061 	 0.001751 	 0.001992 	 0.000977
+
+Promedios
+				Doble base				Triple base 
+Base 2-3	Base 2-5	Base 2-7	Base 3-5	Base 3-7	Base 5-7	Base 2-3-5	Base 2-3-7	Base 2-5-7	Base 3-5-7
+0.006707 	 0.007997 	 0.008429 	 0.008930 	 0.009531 	 0.010730 	 0.007729 	 0.007951 	 0.008769 	 0.009278
+
+El mejor algoritmo es el de base 2-3
+ El promedio de su tiempo es de : 0.006707
+El mejor algoritmo de doble base es el de base 2-3
+ El promedio de su tiempo es de : 0.006707
+El mejor algoritmo de triple base es el de base 2-3-5
+ El promedio de su tiempo es de : 0.007729
